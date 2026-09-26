@@ -1,6 +1,6 @@
 {
   "name": "dom-docs-exporter",
-  "version": "1.1.0",
+  "version": "1.0.0",
   "description": "Chrome extension: export documentation pages as Markdown/text or cleaned HTML, for one or many tabs at once.",
   "private": true,
   "license": "MIT",
