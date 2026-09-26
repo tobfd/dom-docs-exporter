@@ -1,0 +1,96 @@
+{
+  "extName": { "message": "DOM & Docs Exporter" },
+  "extDescription": { "message": "Export documentation pages as Markdown/text or cleaned HTML – for one or many tabs at once." },
+
+  "labelWhat": { "message": "What" },
+  "typeDocs": { "message": "Docs" },
+  "typeDom": { "message": "DOM" },
+  "labelOutput": { "message": "Output" },
+  "outputDownload": { "message": "Download" },
+  "outputClipboard": { "message": "Copy" },
+  "labelFormat": { "message": "Format" },
+  "formatMarkdown": { "message": "Markdown" },
+  "formatText": { "message": "Plain text" },
+
+  "labelCleanup": { "message": "Cleanup" },
+  "presetLlm": { "message": "For LLM" },
+  "presetSelectors": { "message": "For selectors" },
+  "presetCustom": { "message": "Custom" },
+  "presetLlmHint": { "message": "Smallest output: strips everything that isn't structure or content, all on one line. Best for pasting into ChatGPT, Claude, Gemini." },
+  "presetSelectorsHint": { "message": "Keeps data-* attributes (often the most stable selectors) and the original line breaks. Best for building extensions or scrapers." },
+  "presetCustomHint": { "message": "Always removed: script, style, svg, iframe, noscript." },
+
+  "cleanLinkMeta": { "message": "link, meta, template" },
+  "cleanLinkMetaHint": { "message": "Stylesheet/font links and SEO/OpenGraph tags. Keep only to inspect meta tags." },
+  "cleanComments": { "message": "HTML comments" },
+  "cleanCommentsHint": { "message": "Frameworks (Lit, React, Angular) leave thousands of markers. Almost always remove." },
+  "cleanStyleAttrs": { "message": "style attributes" },
+  "cleanStyleAttrsHint": { "message": "Inline styles. Keep when debugging visibility or layout (e.g. display:none)." },
+  "cleanDataAttrs": { "message": "data-* attributes" },
+  "cleanDataAttrsHint": { "message": "Keep when looking for selectors – data-testid & co. are often the most stable ones." },
+  "cleanBase64": { "message": "Embedded data: URLs (base64)" },
+  "cleanBase64Hint": { "message": "Inline images/fonts, often huge. Almost always remove." },
+  "cleanWhitespace": { "message": "Collapse whitespace" },
+  "cleanWhitespaceHint": { "message": "Fewer tokens, but everything ends up on one line. Turn off to read the file yourself." },
+
+  "includeHeader": { "message": "Source header (title, URL, date)" },
+  "labelMultiTabs": { "message": "Multiple tabs" },
+  "combineSeparate": { "message": "Separate files" },
+  "combineSingle": { "message": "One file" },
+
+  "labelTabs": { "message": "Tabs" },
+  "selectAll": { "message": "All" },
+  "selectNone": { "message": "None" },
+  "tabNotExportable": { "message": "can't be exported" },
+  "tabSleeping": { "message": "asleep, will be reloaded" },
+  "tabCountOne": { "message": "1 tab" },
+  "tabCountMany": {
+    "message": "$COUNT$ tabs",
+    "placeholders": { "count": { "content": "$1" } }
+  },
+
+  "buttonExport": {
+    "message": "Export $WHAT$ ($TABS$)",
+    "placeholders": { "what": { "content": "$1" }, "tabs": { "content": "$2" } }
+  },
+  "buttonCopy": {
+    "message": "Copy $WHAT$ ($TABS$)",
+    "placeholders": { "what": { "content": "$1" }, "tabs": { "content": "$2" } }
+  },
+  "buttonExporting": { "message": "Exporting …" },
+
+  "statusCopied": { "message": "Copied to clipboard" },
+  "statusChars": {
+    "message": "$CHARS$ characters · ~$TOKENS$ tokens",
+    "placeholders": { "chars": { "content": "$1" }, "tokens": { "content": "$2" } }
+  },
+  "statusSaved": { "message": "Saved" },
+  "statusError": { "message": "Error" },
+
+  "menuDocsClipboard": { "message": "Docs → Clipboard" },
+  "menuDocsDownload": { "message": "Docs → Download" },
+  "menuDomClipboard": { "message": "DOM → Clipboard" },
+  "menuDomDownload": { "message": "DOM → Download" },
+
+  "toastCopied": {
+    "message": "$WHAT$ copied ✓ ($CHARS$ characters)",
+    "placeholders": { "what": { "content": "$1" }, "chars": { "content": "$2" } }
+  },
+  "toastSaved": {
+    "message": "$WHAT$ saved ✓",
+    "placeholders": { "what": { "content": "$1" } }
+  },
+  "toastFailed": {
+    "message": "$WHAT$ export failed: $ERROR$",
+    "placeholders": { "what": { "content": "$1" }, "error": { "content": "$2" } }
+  },
+
+  "errClipboard": { "message": "Copying to the clipboard failed" },
+  "errNoData": { "message": "The page returned no data" },
+  "errReloadTimeout": { "message": "Tab didn't finish loading (timeout)" },
+  "errFileUrl": { "message": "File URL: enable “Allow access to file URLs” in the extension details" },
+  "errRestricted": { "message": "This page doesn't allow extensions (browser or Web Store page)" },
+  "errErrorPage": { "message": "Tab shows an error page" },
+  "errTabClosed": { "message": "Tab was closed" },
+  "errDownloadPrep": { "message": "Download could not be prepared" }
+}

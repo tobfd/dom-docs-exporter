@@ -1,0 +1,96 @@
+{
+  "extName": { "message": "DOM & Docs Exporter" },
+  "extDescription": { "message": "Exportiert Doku-Seiten als Markdown/Text oder bereinigtes HTML – für einen oder mehrere Tabs auf einmal." },
+
+  "labelWhat": { "message": "Was" },
+  "typeDocs": { "message": "Docs" },
+  "typeDom": { "message": "DOM" },
+  "labelOutput": { "message": "Wohin" },
+  "outputDownload": { "message": "Download" },
+  "outputClipboard": { "message": "Kopieren" },
+  "labelFormat": { "message": "Format" },
+  "formatMarkdown": { "message": "Markdown" },
+  "formatText": { "message": "Text" },
+
+  "labelCleanup": { "message": "Säuberung" },
+  "presetLlm": { "message": "Für LLM" },
+  "presetSelectors": { "message": "Für Selektoren" },
+  "presetCustom": { "message": "Eigene" },
+  "presetLlmHint": { "message": "Kleinste Ausgabe: entfernt alles außer Struktur und Inhalt, alles in einer Zeile. Ideal zum Einfügen in ChatGPT, Claude, Gemini." },
+  "presetSelectorsHint": { "message": "Behält data-*-Attribute (oft die stabilsten Selektoren) und die originalen Zeilenumbrüche. Ideal zum Bauen von Extensions oder Scrapern." },
+  "presetCustomHint": { "message": "Immer entfernt: script, style, svg, iframe, noscript." },
+
+  "cleanLinkMeta": { "message": "link, meta, template" },
+  "cleanLinkMetaHint": { "message": "Stylesheet-/Font-Links und SEO-/OpenGraph-Tags. Nur behalten, um Meta-Tags zu prüfen." },
+  "cleanComments": { "message": "HTML-Kommentare" },
+  "cleanCommentsHint": { "message": "Frameworks (Lit, React, Angular) hinterlassen tausende Marker. Fast immer entfernen." },
+  "cleanStyleAttrs": { "message": "style-Attribute" },
+  "cleanStyleAttrsHint": { "message": "Inline-Styles. Behalten, wenn du Sichtbarkeit oder Layout debuggst (z. B. display:none)." },
+  "cleanDataAttrs": { "message": "data-*-Attribute" },
+  "cleanDataAttrsHint": { "message": "Behalten, wenn du Selektoren suchst – data-testid & Co. sind oft die stabilsten." },
+  "cleanBase64": { "message": "Eingebettete data:-URLs (base64)" },
+  "cleanBase64Hint": { "message": "Inline-Bilder/-Fonts, oft riesig. Fast immer entfernen." },
+  "cleanWhitespace": { "message": "Whitespace zusammenziehen" },
+  "cleanWhitespaceHint": { "message": "Weniger Tokens, aber alles landet in einer Zeile. Aus, wenn du die Datei selbst lesen willst." },
+
+  "includeHeader": { "message": "Quell-Header (Titel, URL, Datum)" },
+  "labelMultiTabs": { "message": "Mehrere Tabs" },
+  "combineSeparate": { "message": "Einzelne Dateien" },
+  "combineSingle": { "message": "Eine Datei" },
+
+  "labelTabs": { "message": "Tabs" },
+  "selectAll": { "message": "Alle" },
+  "selectNone": { "message": "Keine" },
+  "tabNotExportable": { "message": "nicht exportierbar" },
+  "tabSleeping": { "message": "schläft, wird neu geladen" },
+  "tabCountOne": { "message": "1 Tab" },
+  "tabCountMany": {
+    "message": "$COUNT$ Tabs",
+    "placeholders": { "count": { "content": "$1" } }
+  },
+
+  "buttonExport": {
+    "message": "$WHAT$ exportieren ($TABS$)",
+    "placeholders": { "what": { "content": "$1" }, "tabs": { "content": "$2" } }
+  },
+  "buttonCopy": {
+    "message": "$WHAT$ kopieren ($TABS$)",
+    "placeholders": { "what": { "content": "$1" }, "tabs": { "content": "$2" } }
+  },
+  "buttonExporting": { "message": "Exportiere …" },
+
+  "statusCopied": { "message": "In Zwischenablage kopiert" },
+  "statusChars": {
+    "message": "$CHARS$ Zeichen · ~$TOKENS$ Tokens",
+    "placeholders": { "chars": { "content": "$1" }, "tokens": { "content": "$2" } }
+  },
+  "statusSaved": { "message": "Gespeichert" },
+  "statusError": { "message": "Fehler" },
+
+  "menuDocsClipboard": { "message": "Docs → Zwischenablage" },
+  "menuDocsDownload": { "message": "Docs → Download" },
+  "menuDomClipboard": { "message": "DOM → Zwischenablage" },
+  "menuDomDownload": { "message": "DOM → Download" },
+
+  "toastCopied": {
+    "message": "$WHAT$ kopiert ✓ ($CHARS$ Zeichen)",
+    "placeholders": { "what": { "content": "$1" }, "chars": { "content": "$2" } }
+  },
+  "toastSaved": {
+    "message": "$WHAT$ gespeichert ✓",
+    "placeholders": { "what": { "content": "$1" } }
+  },
+  "toastFailed": {
+    "message": "$WHAT$-Export fehlgeschlagen: $ERROR$",
+    "placeholders": { "what": { "content": "$1" }, "error": { "content": "$2" } }
+  },
+
+  "errClipboard": { "message": "Kopieren in die Zwischenablage fehlgeschlagen" },
+  "errNoData": { "message": "Keine Daten von der Seite erhalten" },
+  "errReloadTimeout": { "message": "Tab lädt nicht (Timeout)" },
+  "errFileUrl": { "message": "Datei-URL: in den Extension-Details „Zugriff auf Datei-URLs zulassen“ aktivieren" },
+  "errRestricted": { "message": "Seite erlaubt keine Extensions (Browser-/Store-Seite)" },
+  "errErrorPage": { "message": "Tab zeigt eine Fehlerseite" },
+  "errTabClosed": { "message": "Tab wurde geschlossen" },
+  "errDownloadPrep": { "message": "Download konnte nicht vorbereitet werden" }
+}

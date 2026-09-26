@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title data-i18n="extName">DOM &amp; Docs Exporter</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <h1 data-i18n="extName">DOM &amp; Docs Exporter</h1>
+
+  <div class="row">
+    <div class="field">
+      <span class="field-label" data-i18n="labelWhat">What</span>
+      <div class="seg" role="radiogroup" data-i18n-aria="labelWhat">
+        <label><input type="radio" name="type" value="docs"><span data-i18n="typeDocs">Docs</span></label>
+        <label><input type="radio" name="type" value="dom"><span data-i18n="typeDom">DOM</span></label>
+      </div>
+    </div>
+    <div class="field">
+      <span class="field-label" data-i18n="labelOutput">Output</span>
+      <div class="seg" role="radiogroup" data-i18n-aria="labelOutput">
+        <label><input type="radio" name="output" value="download"><span data-i18n="outputDownload">Download</span></label>
+        <label><input type="radio" name="output" value="clipboard"><span data-i18n="outputClipboard">Copy</span></label>
+      </div>
+    </div>
+  </div>
+
+  <div id="docs-opts" class="row">
+    <div class="field">
+      <span class="field-label" data-i18n="labelFormat">Format</span>
+      <div class="seg" role="radiogroup" data-i18n-aria="labelFormat">
+        <label><input type="radio" name="docsFormat" value="md"><span data-i18n="formatMarkdown">Markdown</span></label>
+        <label><input type="radio" name="docsFormat" value="txt"><span data-i18n="formatText">Plain text</span></label>
+      </div>
+    </div>
+  </div>
+
+  <section id="dom-opts">
+    <div class="row">
+      <div class="field">
+        <span class="field-label" data-i18n="labelCleanup">Cleanup</span>
+        <div class="seg" role="radiogroup" data-i18n-aria="labelCleanup">
+          <label><input type="radio" name="domPreset" value="llm"><span data-i18n="presetLlm">For LLM</span></label>
+          <label><input type="radio" name="domPreset" value="selectors"><span data-i18n="presetSelectors">For selectors</span></label>
+          <label><input type="radio" name="domPreset" value="custom"><span data-i18n="presetCustom">Custom</span></label>
+        </div>
+      </div>
+    </div>
+    <p id="preset-hint" class="hint"></p>
+
+    <div id="custom-clean" hidden>
+      <label class="check">
+        <input type="checkbox" data-clean="linkMeta">
+        <span><span data-i18n="cleanLinkMeta">link, meta, template</span><small data-i18n="cleanLinkMetaHint"></small></span>
+      </label>
+      <label class="check">
+        <input type="checkbox" data-clean="comments">
+        <span><span data-i18n="cleanComments">HTML comments</span><small data-i18n="cleanCommentsHint"></small></span>
+      </label>
+      <label class="check">
+        <input type="checkbox" data-clean="styleAttrs">
+        <span><span data-i18n="cleanStyleAttrs">style attributes</span><small data-i18n="cleanStyleAttrsHint"></small></span>
+      </label>
+      <label class="check">
+        <input type="checkbox" data-clean="dataAttrs">
+        <span><span data-i18n="cleanDataAttrs">data-* attributes</span><small data-i18n="cleanDataAttrsHint"></small></span>
+      </label>
+      <label class="check">
+        <input type="checkbox" data-clean="base64">
+        <span><span data-i18n="cleanBase64">Embedded data: URLs (base64)</span><small data-i18n="cleanBase64Hint"></small></span>
+      </label>
+      <label class="check">
+        <input type="checkbox" data-clean="whitespace">
+        <span><span data-i18n="cleanWhitespace">Collapse whitespace</span><small data-i18n="cleanWhitespaceHint"></small></span>
+      </label>
+    </div>
+  </section>
+
+  <label class="check"><input type="checkbox" id="includeHeader"> <span data-i18n="includeHeader">Source header (title, URL, date)</span></label>
+
+  <div id="combine-row" class="row" hidden>
+    <div class="field">
+      <span class="field-label" data-i18n="labelMultiTabs">Multiple tabs</span>
+      <div class="seg" role="radiogroup" data-i18n-aria="labelMultiTabs">
+        <label><input type="radio" name="combine" value="false"><span data-i18n="combineSeparate">Separate files</span></label>
+        <label><input type="radio" name="combine" value="true"><span data-i18n="combineSingle">One file</span></label>
+      </div>
+    </div>
+  </div>
+
+  <section class="tabs">
+    <div class="tabs-head">
+      <span data-i18n="labelTabs">Tabs</span>
+      <button type="button" id="select-all" class="link" data-i18n="selectAll">All</button>
+      <button type="button" id="select-none" class="link" data-i18n="selectNone">None</button>
+    </div>
+    <ul id="tab-list"></ul>
+  </section>
+
+  <button type="button" id="export" class="primary"></button>
+  <ul id="status" aria-live="polite"></ul>
+
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

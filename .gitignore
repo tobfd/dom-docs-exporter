@@ -1,0 +1,13 @@
+# Build output
+dist/
+*.zip
+node_modules/
+
+# IDE / tools
+.idea/
+.vscode/
+.claude/
+
+# OS
+.DS_Store
+Thumbs.db
