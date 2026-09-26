@@ -31,8 +31,7 @@ export async function runExport(tabIds, settings, output = settings.output) {
   } else if (pages.length > 1 && settings.combine) {
     const filename = `${FOLDER}/${pages.length}-tabs_${settings.type}_${stamp(now)}.${pages[0].ext}`;
     try {
-      await download(combine(pages, now), pages[0].mime, filename);
-      response.combinedFile = filename;
+      response.combinedFile = await download(combine(pages, now), pages[0].mime, filename);
     } catch (e) {
       pages.forEach((p) => Object.assign(p, { ok: false, error: friendlyError(e) }));
     }
@@ -40,8 +39,7 @@ export async function runExport(tabIds, settings, output = settings.output) {
     for (const page of pages) {
       const filename = `${FOLDER}/${fileBase(page)}_${stamp(now)}.${page.ext}`;
       try {
-        await download(withHeader(page, settings.includeHeader, now), page.mime, filename);
-        page.filename = filename;
+        page.filename = await download(withHeader(page, settings.includeHeader, now), page.mime, filename);
       } catch (e) {
         Object.assign(page, { ok: false, error: friendlyError(e) });
       }
@@ -160,13 +158,36 @@ function friendlyError(err) {
 
 // The service worker can't create blob URLs and data: URLs cap out around 2 MB,
 // so an offscreen document turns the content into a blob URL for chrome.downloads.
+// Resolves to the name Chrome actually used (e.g. "… (1).md" after uniquifying).
 async function download(content, mime, filename) {
   await ensureOffscreen();
   const { url, error } = await chrome.runtime.sendMessage({
     target: 'offscreen', cmd: 'blob-url', content, mime,
   });
   if (!url) throw new Error(error || t('errDownloadPrep'));
-  await chrome.downloads.download({ url, filename, conflictAction: 'uniquify' });
+  const id = await chrome.downloads.download({ url, filename, conflictAction: 'uniquify' });
+  const finalPath = await resolvedPath(id);
+  return finalPath ? `${FOLDER}/${finalPath.split(/[\\/]/).pop()}` : filename;
+}
+
+// Chrome determines the final path shortly after the download starts.
+async function resolvedPath(id, timeoutMs = 3000) {
+  let listener;
+  let timer;
+  const changed = new Promise((resolve) => {
+    listener = (delta) => {
+      if (delta.id === id && delta.filename?.current) resolve(delta.filename.current);
+    };
+    timer = setTimeout(() => resolve(''), timeoutMs);
+    chrome.downloads.onChanged.addListener(listener);
+  });
+  try {
+    const [item] = await chrome.downloads.search({ id });
+    return item?.filename || await changed;
+  } finally {
+    clearTimeout(timer);
+    chrome.downloads.onChanged.removeListener(listener);
+  }
 }
 
 // In-flight check-and-create, shared so concurrent exports (popup + context menu)
