@@ -273,15 +273,19 @@ export function extractPage({ type = 'docs', docsFormat = 'md', domClean = {} } 
     function table(node, ctx) {
       const grid = [...node.rows].map((tr) =>
         [...tr.cells].map((cell) =>
-          children(cell, { ...ctx, table: true })
-            .replace(/\s+/g, ' ')
-            .replace(/\|/g, '\\|')
-            .trim()));
+          escapePipes(children(cell, { ...ctx, table: true }).replace(/\s+/g, ' ').trim())));
       const cols = Math.max(0, ...grid.map((r) => r.length));
       if (!cols) return '';
       const line = (r) => `| ${Array.from({ length: cols }, (_, i) => r[i] ?? '').join(' | ')} |`;
       const [head, ...body] = grid;
       return `\n\n${[line(head), `|${' --- |'.repeat(cols)}`, ...body.map(line)].join('\n')}\n\n`;
+    }
+
+    // A "|" inside a cell must be written as "\|". Backslashes right before it are doubled
+    // first, otherwise "\|" in the text would become "\\|" = literal backslash + column break.
+    // Other backslashes stay as they are so code like `C:\Users` isn't altered.
+    function escapePipes(text) {
+      return text.replace(/(\\*)\|/g, (_, slashes) => `${slashes}${slashes}\\|`);
     }
 
     function abs(url) {
